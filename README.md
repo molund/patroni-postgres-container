@@ -6,11 +6,11 @@ You will find a sample of how to deploy the image [here](./samples/README.md).
 
 # Image Management
 
-This image is based on PostgreSQL v12.4.  Due to this being an old version of both Patroni and Postgres, we no longer automatically rebuild it to pick up software updates, because the Dockerfile no longer builds, due to software version changes.  We are planning on providing updated information soon.
+This image is based on PostgreSQL v12.19.  Due to this being an old version of both Patroni and Postgres, we no longer automatically rebuild it to pick up software updates, because the Dockerfile no longer builds, due to software version changes.  We are planning on providing updated information soon.
 
 ## Tags
 
-The stable tag for this image is `2.0.1-12.4-latest`.
+The stable tag for this image is `2.1.7-12.19-latest`.
 
 See the [release notes](./RELEASE.md) for more information and any other unique tags. 
 
@@ -19,7 +19,7 @@ See the [release notes](./RELEASE.md) for more information and any other unique 
 Below is a sample of how you might reference this image from a `StatefulSet` deployment manifest. 
 
 ```yaml
-  image: artifacts.developer.gov.bc.ca/bcgov-docker-local/patroni-postgres:2.0.1-12.4-latest
+  image: artifacts.developer.gov.bc.ca/bcgov-docker-local/patroni-postgres:2.1.7-12.19-latest
 ```
 
 Find a sample StatefulSet deployment [here](./samples/README.md).
@@ -57,8 +57,8 @@ oc secrets add sa/builder secrets/bcgov-tools-klab --for=pull
 And finally, create an `imagestreamtag` to import the image to your cluster. Again, for the `-from-image` argument use the **external registry host name**.
 
 ```console
-oc create imagestreamtag patroni-postgresql:12.4-latest \
-  --from-image=image-registry.foo.bar.gov.bc.ca /bcgov-tools/patroni-postgresql:12.4-latest
+oc create imagestreamtag patroni-postgresql:12.19-latest \
+  --from-image=image-registry.foo.bar.gov.bc.ca /bcgov-tools/patroni-postgresql:12.19-latest
 ```
 
 Check to make sure it imported:

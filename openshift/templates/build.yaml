@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 ---
-apiVersion: v1
+apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
   name: patroni
@@ -29,13 +29,13 @@ parameters:
     value: "patroni-postgres"
   - name: OUT_VERSION
     description: Ouput version
-    value: "12.4-latest"
+    value: "2.1.7-12.19-latest"
   - name: GIT_URI
     value: "https://github.com/bcgov/patroni-postgres-container.git"
   - name: GIT_REF
     value: "master"
   - name: PG_VERSION
-    value: "12.4"
+    value: "12.9"
 objects:
   # Postgres ImageStream is created if it doesn't already exist
   - apiVersion: image.openshift.io/v1
@@ -84,11 +84,9 @@ objects:
         type: Git
       strategy:
         dockerStrategy:
-          pullSecret:
-            name: dockerhub-creds 
           from:
             kind: DockerImage
-            name: postgres:12.4
+            name: postgres:12.19
         type: Docker
       triggers:
         - type: ConfigChange
